@@ -70,7 +70,7 @@ public class UserService implements UserDetailsService {
         user.setUsername(tempName);
 
         Set<Role> roles = registrationDTO.getAuthorities();
-        roles.add(roleRepository.findByAuthority("ADMIN").get());
+        roles.add(roleRepository.findByAuthority("USER").get());
         registrationDTO.setAuthorities(roles);
 
         //Set<Role> roles =  (Set<Role>) applicationUser.getAuthorities();

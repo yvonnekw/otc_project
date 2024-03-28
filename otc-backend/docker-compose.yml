@@ -5,8 +5,8 @@ services:
   app:
     image: 'otc-backend-springboot-docker-img:latest'
     build:
-      context: backend/otc
-    container_name: otc-backend
+      context: otc-backend
+    #container_name: otc-backend
     depends_on:
       - db
     environment:
@@ -15,11 +15,11 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
     ports:
-      - "8000:8080"
+      - "8000:8000"
 
   db:
     image: 'postgres:16.1'
-    container_name: otc-db
+    #container_name: otc-db
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -32,9 +32,9 @@ services:
     image: 'otc-frontend-vite-react-docker-img:latest'
     build:
       context: frontend
-    container_name: otc-frontend
+    #container_name: otc-frontend
     ports:
-        - "2002:2000"  # Assuming your Vite React frontend runs on port 3000
+        - "2000:2000"
 
   rabbitmq:
     image: rabbitmq:latest

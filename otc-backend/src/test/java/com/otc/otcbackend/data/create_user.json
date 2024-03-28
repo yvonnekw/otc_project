@@ -1,0 +1,8 @@
+{
+ "firstName": "Yodal",
+ "lastName": "Pinky",
+ "emailAddress": "yodal@email.com",
+ "username": "yodalpinky1",
+ "password": "password",
+  "authorities": ["ADMIN"]
+}

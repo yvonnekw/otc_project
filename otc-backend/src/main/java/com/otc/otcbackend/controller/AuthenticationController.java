@@ -43,7 +43,7 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
 
-   //@Autowired
+   @Autowired
     public AuthenticationController(UserService userService, TokenService tokenService, AuthenticationManager authenticationManager, RabbitMQJsonProducer rabbitMQJsonProducer){
         this.userService = userService;
         this.tokenService = tokenService;
