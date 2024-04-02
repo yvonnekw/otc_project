@@ -9,6 +9,15 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+
     services:
       db:
         image: postgres:16.1
