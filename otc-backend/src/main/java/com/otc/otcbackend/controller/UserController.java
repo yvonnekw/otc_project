@@ -138,7 +138,6 @@ public class UserController {
 
     @GetMapping("/{username}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-   // @CrossOrigin(origins = "http://localhost:2000")
     public ResponseEntity<?> getUserByUserName(@PathVariable("username") String username) {
         try {
             Users theUser = userService.getUserByUsername(username);

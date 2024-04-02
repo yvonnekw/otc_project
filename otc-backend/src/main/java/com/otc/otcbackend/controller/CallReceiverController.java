@@ -38,10 +38,6 @@ public class CallReceiverController {
         this.rabbitMQJsonProducer = rabbitMQJsonProducer;
     }
 
-   /// public ResponseEntity<String> sendJsonMessage() {
-        
-   // }
-
     @GetMapping("/callreceiver")
     public String calls(){
         return "call receiver";

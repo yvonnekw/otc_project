@@ -6,7 +6,7 @@ services:
     image: 'otc-backend-springboot-docker-img:latest'
     build:
       context: otc-backend
-    #container_name: otc-backend
+    #container_name: otcbackend
     depends_on:
       - db
     environment:
@@ -42,7 +42,8 @@ services:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     ports:
-      - "5672:5672"
+      - "5673:5672"
+      - "15673:15672"
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0

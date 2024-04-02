@@ -2,6 +2,8 @@ package com.otc.otcbackend.controller;
 
 import java.util.LinkedHashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @CrossOrigin("*")
 public class AuthenticationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
     private final UserService userService;
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
@@ -53,7 +56,7 @@ public class AuthenticationController {
 
     @ExceptionHandler({EmailAlreadyTakenException.class})
     public ResponseEntity<String> handleEmailTaken(){
-        return new ResponseEntity<String>("The email you provided isa already taken", HttpStatus.CONFLICT);
+        return new ResponseEntity<String>("The email you provided is already taken", HttpStatus.CONFLICT);
 
     }
      
@@ -66,8 +69,13 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public Users registerUser(@RequestBody RegistrationDto body) {
+        try {
         rabbitMQJsonProducer.sendJsonMessage(body);
         return userService.registerUser(body);
+        } catch (Exception e) {
+            logger.error("Error occurred during user registration: " + e.getMessage(), e);
+            throw e;
+        }
     }
 
     
