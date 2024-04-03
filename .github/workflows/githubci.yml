@@ -47,16 +47,6 @@ jobs:
       # Setup Java JDK
       - name: Setup Java JDK
         uses: actions/setup-java@v2
-        with:
-          java-version: '19'
-          distribution: 'linux'
-          java-package: 'jdk'
-          architecture: 'x64'
-          check-latest: false
-          server-id: 'github'
-          server-password: ${{ secrets.GH_TOKEN }}  # GitHub token
-          overwrite-settings: true
-          job-status: 'success'
 
       # Build the frontend
       - name: Build frontend
@@ -69,7 +59,7 @@ jobs:
       - name: Build backend
         run: |
           cd otc-backend
-          mvn clean install -DskipTests
+          ./mvnw clean install -DskipTests
 
       # Log in to Docker Hub (or your Docker registry)
       - name: Log in to Docker Hub
