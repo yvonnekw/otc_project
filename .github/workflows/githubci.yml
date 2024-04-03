@@ -44,10 +44,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Setup Java JDK
-      - name: Setup Java JDK
-        uses: actions/setup-java@v2
-
       # Build the frontend
       - name: Build frontend
         run: |
