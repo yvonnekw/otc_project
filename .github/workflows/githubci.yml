@@ -49,6 +49,14 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'ubuntu'
+          java-package: 'jdk'
+          architecture: 'x64'
+          check-latest: false
+          server-id: 'github'
+          server-password: ${{ secrets.GH_TOKEN }}  # GitHub token
+          overwrite-settings: true
+          job-status: 'success'
 
       # Build the frontend
       - name: Build frontend
