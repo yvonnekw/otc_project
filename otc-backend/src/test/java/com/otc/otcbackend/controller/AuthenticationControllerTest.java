@@ -1,5 +1,7 @@
 package com.otc.otcbackend.controller;
 
+import com.otc.otcbackend.base.TestBase;
+import com.otc.otcbackend.body.RegistrationDtoGenerator;
 import com.otc.otcbackend.body.TestDataProvider;
 import com.otc.otcbackend.dto.RegistrationDto;
 import com.otc.otcbackend.models.Role;
@@ -32,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
-class AuthenticationControllerTest {
+class AuthenticationControllerTest extends TestBase {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthenticationControllerTest.class);
 /*
@@ -46,15 +48,17 @@ class AuthenticationControllerTest {
     HttpHeaders headers = new HttpHeaders();
 
     @Autowired
-    private RoleRepository roleRepository;
+    RegistrationDtoGenerator registrationDtoGenerator;
+
     @Autowired
-    TestDataProvider testDataProvider;
+    private RoleRepository roleRepository;
+    //@Autowired
+    //TestDataProvider testDataProvider;
 
     @Test
     public void registerUserTest(){
-        RegistrationDto registrationDto = testDataProvider.generateRandomRegistrationDto();
-        HttpEntity<RegistrationDto> entity = new HttpEntity<>(registrationDto, headers);
-        ResponseEntity<String> response = restTemplate.exchange("/auth/register", HttpMethod.POST, entity, String.class);
+        RegistrationDto registrationDto = registrationDtoGenerator.generateRandomRegistrationDto();
+        ResponseEntity<String> response = registerUser(registrationDto, headers);
         String actualResults = response.getBody();
         logger.info("actual result " + actualResults);
 
@@ -64,76 +68,19 @@ class AuthenticationControllerTest {
 
     @Test
     public void userLoginTest(){
-        RegistrationDto registrationDto = testDataProvider.generateRandomRegistrationDto();
-        HttpEntity<RegistrationDto> registrationEntity = new HttpEntity<>(registrationDto, headers);
-        ResponseEntity<String> registrationResponse = restTemplate.exchange("/auth/register", HttpMethod.POST, registrationEntity, String.class);
+        RegistrationDto registrationDto = registrationDtoGenerator.generateRandomRegistrationDto();
+        ResponseEntity<String> response = registerUser(registrationDto, headers);
 
-        assertEquals(HttpStatus.OK, registrationResponse.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        String registrationResponseBody = registrationResponse.getBody();
+        String registrationResponseBody = response.getBody();
         assertNotNull(registrationResponseBody);
         String username = extractUsernameFromRegistrationResponse(registrationResponseBody);
 
+        String loginResponse = loginUserAndGetToken(username, registrationDto.getPassword());
 
-        LinkedHashMap<String, String> loginBody = new LinkedHashMap<>();
-        loginBody.put("username", username);
-        loginBody.put("password", registrationDto.getPassword());
-        HttpEntity<LinkedHashMap<String, String>> loginEntity = new HttpEntity<>(loginBody, headers);
-        ResponseEntity<String> loginResponse = restTemplate.exchange("/auth/login", HttpMethod.POST, loginEntity, String.class);
+        logger.info("actual result login " + loginResponse);
 
-        assertEquals(HttpStatus.OK, loginResponse.getStatusCode());
-
-        String actualResults = loginResponse.getBody();
-        logger.info("actual result " + actualResults);
-
-        String loginResponseBody = loginResponse.getBody();
-        assertNotNull(loginResponseBody);
-        String token = extractTokenFromLoginResponse(loginResponseBody);
-
-        assertNotNull(token);
+        assertNotNull(loginResponse);
     }
-
-    private String extractUsernameFromRegistrationResponse(String registrationResponseBody) {
-        try {
-            // Create an ObjectMapper instance
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            // Parse the JSON response string into a JsonNode
-            JsonNode rootNode = objectMapper.readTree(registrationResponseBody);
-
-            String extractedUsername;
-            extractedUsername = rootNode.get("username").asText();
-
-            return extractedUsername;
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-            return null;
-        }
-    }
-
-    private String extractTokenFromLoginResponse(String loginResponseBody) {
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            JsonNode rootNode = objectMapper.readTree(loginResponseBody);
-
-            JsonNode tokenNode = rootNode.get("token");
-
-            if (tokenNode != null && !tokenNode.isNull()) {
-
-                return tokenNode.asText();
-            } else {
-
-                return null;
-            }
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-            return null;
-        }
-    }
-
 }

@@ -190,6 +190,10 @@ public class Users implements UserDetails {
 		this.verification = verification;
 	}
 
+	public Users(String username) {
+		this.username = username;
+	}
+
 	public Long getUserId() {
 		return this.userId;
 	}

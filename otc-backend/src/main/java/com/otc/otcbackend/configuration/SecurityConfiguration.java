@@ -61,7 +61,7 @@ public class SecurityConfiguration {
                 auth.requestMatchers("/auth/**").permitAll();
                 auth.requestMatchers("/user/**").permitAll();
                 auth.requestMatchers("/calls/**").permitAll();
-                auth.requestMatchers("/callreceiver/**").permitAll();
+                auth.requestMatchers("/call-receiver/**").permitAll();
                 auth.requestMatchers("/invoices/**").permitAll();
                 auth.requestMatchers("/payments/**").permitAll();
                 auth.requestMatchers("/users/**").permitAll();
@@ -69,8 +69,8 @@ public class SecurityConfiguration {
                 auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
                 auth.anyRequest().authenticated();
             });
-            
         http.oauth2ResourceServer()
+        //http.authenticationManager()
                 .jwt()
                 .jwtAuthenticationConverter(jwtAuthenticationConverter());
         http.sessionManagement(
