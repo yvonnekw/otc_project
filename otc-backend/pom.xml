@@ -14,7 +14,7 @@
 	<name>otc-backend</name>
 	<description>Optical Telephone Company Spring Boot backend</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>20</java.version>
 	</properties>
 	<repositories>
 		<repository>
