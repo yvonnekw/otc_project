@@ -108,7 +108,7 @@ jobs:
           image: yvonnetest/otc-backend-springboot-docker-img
           tags: latest
           registry: docker.io
-          dockerfile: "Dockerfile"
+          dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
@@ -118,6 +118,6 @@ jobs:
           image: yvonnetest/otc-frontend-vite-react-docker-img
           tags: latest
           registry: docker.io
-          dockerfile: "Dockerfile"
+          dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
