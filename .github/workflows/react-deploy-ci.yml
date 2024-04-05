@@ -1,0 +1,37 @@
+  on:
+    push:
+      branches: [main]
+       # - pull_request:
+
+    workflow_dispatch:
+      inputs:
+        job_name:
+          description: "Run Job"
+          required: true
+          default: "build_deploy"
+
+  jobs:
+    build_deploy:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v2
+        - name: Npm Install packages
+          run: npm install
+
+      #code coverage can be set up later - codecovio
+        #- name: Test & Code Coverage
+          #run: npm test -- --coverage
+
+        #- name: Upload Code Coverage
+         # uses: codecov/codecov-action@v1
+          #with:
+            #token:  ${{ secrets.CODECOV_TOKEN }}
+
+
+        - name: Build Package
+          env:
+            CI: false
+          run: npm run build
+
+
