@@ -2,6 +2,8 @@
     #push:
       #branches: [main]
         #- pull_request:
+
+  name: react vite ci
   on:
     pull_request:
       branches:
@@ -23,6 +25,8 @@
         - name: install frontend
           run: |
             cd frontend
+            using: 'node20'
+            main: 'main.js'
             npm install
         - name: Build frontend Package
           env:
