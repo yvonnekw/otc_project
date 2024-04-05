@@ -5,7 +5,7 @@ FROM openjdk:20
 WORKDIR /app
 
 # Copy the JAR file into the container
-COPY target/otc-backend-0.0.1-SNAPSHOT.jar /app/otc-springboot-backend-image.jar
+COPY target/otc-springboot-backend-image.jar /app/otc-springboot-backend-image.jar
 
 # Expose port
 EXPOSE 8000
