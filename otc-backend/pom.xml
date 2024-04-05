@@ -119,6 +119,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>otc-springboot-backend-image</finalName>
 	</build>
 
 </project>
