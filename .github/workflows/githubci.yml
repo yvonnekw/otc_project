@@ -96,9 +96,9 @@ jobs:
         run: |
           # Build frontend Docker image
           docker build -t otc-vite-react-frontend-image
-          docker push otc-vite-react-frontend-image:latest
+          docker push yvonnetest/otc-vite-react-frontend-image:latest
 
           # Build backend Docker image
           docker build -t otc-springboot-backend-image
-          docker push otc-springboot-backend-image:latest
+          docker push yvonnetest/otc-springboot-backend-image:latest
           
