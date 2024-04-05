@@ -105,7 +105,7 @@ jobs:
       - name: Build and push Docker image for backend
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          image: yvonnetest/otc-springboot-backend-image
+          image: yvonnetest/otc-backend-springboot-docker-img
           tags: latest
           registry: docker.io
           dockerfile: "Dockerfile"
@@ -115,7 +115,7 @@ jobs:
       - name: Build and push Docker image for frontend
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
-          image: yvonnetest/otc-vite-react-frontend-image
+          image: yvonnetest/otc-frontend-vite-react-docker-img
           tags: latest
           registry: docker.io
           dockerfile: "Dockerfile"
