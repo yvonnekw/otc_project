@@ -28,7 +28,9 @@
         - name: Build Package
           env:
             CI: false
-          run: npm run build
+          run: |
+            cd frontend
+            npm run build
       #code coverage can be set up later - codecovio
         #- name: Test & Code Coverage
           #run: npm test -- --coverage
