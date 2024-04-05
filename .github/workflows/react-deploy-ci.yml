@@ -20,9 +20,14 @@
 
       steps:
         - uses: actions/checkout@v3
+        - name: Change to frontend directory
+          run: cd frontend
         - name: Npm Install packages
           run: npm install
-
+        - name: Build Package
+          env:
+            CI: false
+          run: npm run build
       #code coverage can be set up later - codecovio
         #- name: Test & Code Coverage
           #run: npm test -- --coverage
