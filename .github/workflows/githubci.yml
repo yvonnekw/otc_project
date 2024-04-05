@@ -91,14 +91,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-          # Build and push Docker images for frontend and backend
       - name: Build and push Docker images
         run: |
           # Build frontend Docker image
-          docker build -t otc-vite-react-frontend-image
+          docker build -t yvonnetest/otc-vite-react-frontend-image:latest frontend
           docker push yvonnetest/otc-vite-react-frontend-image:latest
 
           # Build backend Docker image
-          docker build -t otc-springboot-backend-image
+          docker build -t yvonnetest/otc-springboot-backend-image:latest otc-backend
           docker push yvonnetest/otc-springboot-backend-image:latest
           
