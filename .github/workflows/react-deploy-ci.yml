@@ -20,11 +20,10 @@
 
       steps:
         - uses: actions/checkout@v3
-        - name: Build frontend
+        - name: install frontend
           run: |
             cd frontend
             npm install
-            npm run build
         - name: Build Package
           env:
             CI: false
