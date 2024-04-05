@@ -1,0 +1,54 @@
+  #on:
+    #push:
+      #branches: [main]
+        #- pull_request:
+
+  name: react vite ci
+  on:
+    pull_request:
+      branches:
+        - main
+
+    workflow_dispatch:
+      inputs:
+        job_name:
+          description: "Run Job"
+          required: true
+          default: "build_deploy"
+
+  jobs:
+    build_deploy:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v3
+        - name: Set up Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 20
+        - name: install frontend
+          run: |
+            cd frontend
+            npm install
+        - name: Build frontend Package
+          env:
+            CI: false
+          run: |
+            cd frontend
+            npm run build
+      #code coverage can be set up later - codecovio
+        #- name: Test & Code Coverage
+          #run: npm test -- --coverage
+
+        #- name: Upload Code Coverage
+         # uses: codecov/codecov-action@v1
+          #with:
+            #token:  ${{ secrets.CODECOV_TOKEN }}
+
+
+       # - name: Build Package
+          #env:
+           # CI: false
+          #run: npm run build
+
+

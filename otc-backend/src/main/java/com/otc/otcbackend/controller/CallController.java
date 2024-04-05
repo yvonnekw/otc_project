@@ -26,10 +26,8 @@ import com.otc.otcbackend.services.CallService;
 @CrossOrigin("*")
 public class CallController {
 
-    //private final UserService userService;
     private final CallService callService;
 
-    //private final InvoiceService invoiceService;
     private final RabbitMQJsonProducer rabbitMQJsonProducer;
 
     public CallController(CallService callService,  RabbitMQJsonProducer rabbitMQJsonProducer) {

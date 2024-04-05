@@ -1,11 +1,34 @@
 package com.otc.otcbackend.dto;
 
+import com.otc.otcbackend.models.Users;
+
 public class CallReceiverDto {
 
     private Long callReceiverId;
 	private String telephone;
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
+
+    private Users user;
 	
     public CallReceiverDto() {
+    }
+
+    public CallReceiverDto(String telephone, Users user) {
+        this.telephone = telephone;
+        this.user = user;
+    }
+
+    public CallReceiverDto(Long callReceiverId, String telephone, Users user) {
+        this.callReceiverId = callReceiverId;
+        this.telephone = telephone;
+        this.user = user;
     }
 
     public Long getCallReceiverId() {
@@ -22,10 +45,11 @@ public class CallReceiverDto {
         this.telephone = telephone;
     }
 
+    /*
     public CallReceiverDto(Long callReceiverId, String telephone) {
         this.callReceiverId = callReceiverId;
         this.telephone = telephone;
-    }
+    }*/
 
     @Override
     public String toString() {

@@ -1,7 +1,11 @@
 package com.otc.otcbackend.controller;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +30,7 @@ import com.otc.otcbackend.services.CallService;
 import com.otc.otcbackend.services.UserService;
 
 @RestController
-@RequestMapping("/callreceiver")
+@RequestMapping("/call-receiver")
 @CrossOrigin("*")
 public class CallReceiverController {
     
@@ -38,16 +42,19 @@ public class CallReceiverController {
         this.rabbitMQJsonProducer = rabbitMQJsonProducer;
     }
 
-   /// public ResponseEntity<String> sendJsonMessage() {
-        
-   // }
-
-    @GetMapping("/callreceiver")
+    @GetMapping("/call")
     public String calls(){
         return "call receiver";
     }
 
-    @PostMapping("/add/reciever")
+
+    
+    @GetMapping("/phone-numbers/username/{username}")
+    public ResponseEntity<List<CallReceiver>> getDistinctPhoneNumbersForUser(@PathVariable String username) {
+        List<CallReceiver> callReceivers = callReceiverService.getCallReceiversByUsername(username);
+        return new ResponseEntity<>(callReceivers, HttpStatus.OK);
+    }
+    @PostMapping("/add/receiver")
     public ResponseEntity<String> callReceiver(@RequestBody LinkedHashMap<String, String> body) throws Exception {
 
         String telephone = body.get("telephone");
@@ -66,15 +73,19 @@ public class CallReceiverController {
         CallReceiver callReceiver = callReceiverService.addCallReceiver(username, callReceiverDTO);
         rabbitMQJsonProducer.sendJsonMessage(callReceiver);
 
-        return ResponseEntity.ok("Phone number registered successfully.");
-    }
-    
-    @GetMapping("/phone-numbers/username/{username}")
-    public ResponseEntity<List<CallReceiver>> getDistinctPhoneNumbersForUser(@PathVariable String username) {
-        List<CallReceiver> callReceivers = callReceiverService.getCallReceiversByUsername(username);
-        return new ResponseEntity<>(callReceivers, HttpStatus.OK);
-    }
+        // Construct the response map
+        Map<String, String> jsonResponse = new HashMap<>();
+        jsonResponse.put("username", username);
+        jsonResponse.put("telephone", telephone);
+        jsonResponse.put("message", "Phone number registered successfully.");
 
+        // Serialize the map to JSON
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = objectMapper.writeValueAsString(jsonResponse);
+
+        return ResponseEntity.ok(jsonString);
+
+    }
     @GetMapping("/phone-numbers")
     public ResponseEntity<List<String>> findDistinctTelephoneByUserUsername(@RequestParam String username) {
         System.out.println("username " + username);

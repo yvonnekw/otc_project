@@ -39,8 +39,6 @@ public class CallReceiver {
         this.user = user;
     }
 
-
-
     public CallReceiver() {
     }
 

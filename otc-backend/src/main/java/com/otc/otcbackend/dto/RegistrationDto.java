@@ -82,15 +82,27 @@ public class RegistrationDto {
 	}
 
     public RegistrationDto(String firstName, String lastName, String emailAddress, String password,
-            String telephone, Set<Role> authoritie) {
+            String telephone, Set<Role> authorities) {
         super();
-       // this.username = username;
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+        this.telephone = telephone;
+        this.authorities = authorities;
+    }
+
+    public RegistrationDto(String username, String firstName, String lastName, String emailAddress, String password,
+                           String telephone,  Set<Role> authorities) {
+        super();
+         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.telephone = telephone;
-        this.authorities = authoritie;
+        this.authorities = authorities;
     }
 /* 
     public RegistrationDTO(String firstName, String lastName) {

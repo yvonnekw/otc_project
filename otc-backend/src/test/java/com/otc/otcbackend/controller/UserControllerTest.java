@@ -3,6 +3,8 @@ package com.otc.otcbackend.controller;
 import com.otc.otcbackend.models.Call;
 import com.otc.otcbackend.models.Users;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -27,14 +29,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 class UserControllerTest {
 
-    //@Container
-   // @ServiceConnection
-    //static PostgreSQLContainer<?> postgresqlContainer = new PostgreSQLContainer<>("postgres:16");
-
-    @Container
-    public DockerComposeContainer<?> environment =
-            new DockerComposeContainer<>(new File(System.getProperty("user.dir")+"/docker-compose.yml"))
-                    .withLocalCompose(true);
+    private static final Logger logger = LoggerFactory.getLogger(UserControllerTest.class);
+    /*
+        //@Container
+       // @ServiceConnection
+        //static PostgreSQLContainer<?> postgresqlContainer = new PostgreSQLContainer<>("postgres:16");
+    /*
+        @Container
+        public DockerComposeContainer<?> environment =
+                new DockerComposeContainer<>(new File(System.getProperty("user.dir")+"/docker-compose.yml"))
+                        .withLocalCompose(true);*/
     @Autowired
     TestRestTemplate restTemplate;
 
@@ -43,6 +47,7 @@ class UserControllerTest {
         //user/all-users
         Users[] user = restTemplate.getForObject("/user/all-users", Users[].class);
        // assertThat(user.length).isEqualTo(2);
+        logger.info("user details " + Arrays.toString(user));
         assertThat(user.length).isNotNull();
         assertThat(Arrays.stream(user).findFirst()).isPresent();
     }

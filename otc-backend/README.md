@@ -69,7 +69,7 @@ Additionally, the frontend Dockerfile generates and packages the required files 
 ##### Use the Dockerfile to deploy the backend.
 
 `cd backend/otc`
-If is `ls` or list for the folders and files of the above directory, Dockerfile should be listed.
+If is `ls` or list for the folders and files of the above directory, Dockerfile should be listed.
 
 Use the following command to generate the backend Docker image:
 
