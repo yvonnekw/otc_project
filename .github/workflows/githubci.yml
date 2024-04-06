@@ -95,6 +95,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
+          tags: user/app:latest
         #run: |
           # Build frontend Docker image
           #docker build -t yvonnetest/otc-vite-react-frontend-image:latest frontend
