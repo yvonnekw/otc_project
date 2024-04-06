@@ -18,6 +18,6 @@ FROM openjdk:20
 #COPY /target/*.jar app.jar
 
 # Expose port
-#EXPOSE 8000
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 8000
+ADD otc-backend/target/otc-springboot-backend-image.jar otc-springboot-backend-image.jar
+ENTRYPOINT ["java","-jar","/otc-springboot-backend-image.jar"]
