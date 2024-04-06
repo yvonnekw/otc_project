@@ -13,11 +13,11 @@ FROM openjdk:20
 # Command to run the application
 #CMD ["java", "-jar", "otc-springboot-backend-image.jar"]
 
-VOLUME /tmp
+#VOLUME /tmp
 
-COPY /target/*.jar app.jar
+#COPY /target/*.jar app.jar
 
 # Expose port
-EXPOSE 8000
+#EXPOSE 8000
 
 ENTRYPOINT ["java","-jar","/app.jar"]
