@@ -93,7 +93,7 @@ jobs:
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v5
-        run: |
+        #run: |
           # Build frontend Docker image
           docker build -t yvonnetest/otc-vite-react-frontend-image:latest frontend
           docker push yvonnetest/otc-vite-react-frontend-image:latest
