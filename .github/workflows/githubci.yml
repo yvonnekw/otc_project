@@ -95,7 +95,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: user/app:latest
+          tags: yvonnetest/otc-springboot-backend-image:latest
           dockerfile: otc-backend/Dockerfile
           context: otc-backend
         #run: |
