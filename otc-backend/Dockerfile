@@ -15,7 +15,7 @@ FROM openjdk:20
 
 VOLUME /tmp
 
-COPY target/*.jar app.jar
+COPY /target/*.jar app.jar
 
 # Expose port
 EXPOSE 8000
