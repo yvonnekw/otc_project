@@ -68,7 +68,7 @@ Additionally, the frontend Dockerfile generates and packages the required files 
 
 ##### Use the Dockerfile to deploy the backend.
 
-`cd backend/otc`
+`cd otc-backend`
 If is `ls` or list for the folders and files of the above directory, Dockerfile should be listed.
 
 Use the following command to generate the backend Docker image:
@@ -108,3 +108,12 @@ Verify that the GitHub action secrets are configured with the relevant environme
 ### Tests
 
 The tests are currently written in Postman. In the future, component and integration tests will be written.
+
+## To pull and run the remote docker images
+
+`docker pull yvonnetest/otc-vite-react-frontend-image`
+
+`docker pull yvonnetest/otc-springboot-backend-image`
+
+`docker images`
+

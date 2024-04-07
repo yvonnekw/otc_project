@@ -63,6 +63,7 @@ public class SecurityConfiguration {
                 auth.requestMatchers("/calls/**").permitAll();
                 auth.requestMatchers("/call-receiver/**").permitAll();
                 auth.requestMatchers("/invoices/**").permitAll();
+                auth.requestMatchers("/actuator/**").permitAll();
                 auth.requestMatchers("/payments/**").permitAll();
                 auth.requestMatchers("/users/**").permitAll();
                 auth.requestMatchers("/admin/**").hasRole("ADMIN");
