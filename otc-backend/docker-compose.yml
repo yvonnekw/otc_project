@@ -30,8 +30,8 @@ services:
 
   frontend:
     image: 'otc-frontend-vite-react-docker-img:latest'
-    build:
-      context: frontend
+   # build:
+      #context: frontend
     #container_name: otc-frontend
     ports:
         - "2000:2000"
